@@ -8,7 +8,7 @@ final class UserSignInLoading extends UserState {}
 final class UserSignInSucess extends UserState {}
 
 
-final class UserSignInFailur extends UserState {}final class UserSignInFailed extends UserState {
+final class UserSignInFailed extends UserState {
   
    String ErrorMEssage ; 
 

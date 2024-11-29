@@ -17,14 +17,19 @@ class SignUpScreen extends StatelessWidget {
     return SafeArea(
       child: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
-          // implement listener
-            if (state is UserSignInFailur) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("Sucess")));
-          } else if (state is UserSignInFailed) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("Failed")));
-          }
+         if (state is UserSignInFailed) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Sign-In Failed")));
+  } else if (state is UserSignInSucess) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Sign-In Successful")));
+  } else if (state is UserSignInFailed) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Sign-Up Failed")));
+  } else if (state is UserSignInSucess) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Sign-Up Successful")));
+  }
         },
         builder: (context, state) {
           return Scaffold(
@@ -88,7 +93,7 @@ class SignUpScreen extends StatelessWidget {
                       onPressed: () {
 
 
-                              context.read<UserCubit>().SIgnUp();
+                              context.read<UserCubit>().Registeration();
 
 
                       },

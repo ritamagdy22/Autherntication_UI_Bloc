@@ -18,13 +18,14 @@ class SignInScreen extends StatelessWidget {
     return SafeArea(
       child: BlocConsumer<UserCubit, UserState>(
         listener: (context, state) {
-          //implement listener
-          if (state is UserSignInFailur) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("Sucess")));
-          } else if (state is UserSignInFailed) {
+          print('Current state: $state');
+
+          if (state is UserSignInFailed) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.ErrorMEssage)));
+          } else if (state is UserSignInSucess) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('Sign-in successful')));
           }
         },
         builder: (context, state) {
@@ -69,10 +70,9 @@ class SignInScreen extends StatelessWidget {
                             const SizedBox(height: 20),
                             //!Sign In Button
                             CustomFormButton(
-                              innerText: 'Sign In',
-                              onPressed: () {
-
-                               /*
+                                innerText: 'Sign In',
+                                onPressed: () {
+                                  /*
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -82,10 +82,8 @@ class SignInScreen extends StatelessWidget {
                   
                                */
 
-                              context.read<UserCubit>().signIn();
-
-                              }
-                            ),
+                                  context.read<UserCubit>().Login();
+                                }),
                             const SizedBox(height: 18),
                             //! Dont Have An Account ?
                             DontHaveAnAccountWidget(size: size),
