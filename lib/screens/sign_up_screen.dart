@@ -1,5 +1,5 @@
-import 'package:api/cubit/User_Cubit.dart';
-import 'package:api/cubit/User_State.dart';
+import 'package:api/cubit/Cubit/All_Cubit_Classes.dart';
+import 'package:api/cubit/Cubit/All_Cubit_States.dart';
 import 'package:api/widgets/already_have_an_account_widget.dart';
 import 'package:api/widgets/custom_form_button.dart';
 import 'package:api/widgets/custom_input_field.dart';
@@ -15,18 +15,18 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocConsumer<UserCubit, UserState>(
+      child: BlocConsumer<All_Cubit_Classes, All_Cubit_States>(
         listener: (context, state) {
-         if (state is UserSignInFailed) {
+         if (state is User_Registeration_Failed) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("Sign-In Failed")));
-  } else if (state is UserSignInSucess) {
+  } else if (state is User_Registeration_Sucess) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("Sign-In Successful")));
-  } else if (state is UserSignInFailed) {
+  } else if (state is User_Registeration_Failed) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("Sign-Up Failed")));
-  } else if (state is UserSignInSucess) {
+  } else if (state is User_Registeration_Sucess) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("Sign-Up Successful")));
   }
@@ -36,7 +36,7 @@ class SignUpScreen extends StatelessWidget {
             backgroundColor: const Color(0xffEEF1F3),
             body: SingleChildScrollView(
               child: Form(
-                key: context.read<UserCubit>().signUpFormKey,
+                key: context.read<All_Cubit_Classes>().signUpFormKey,
                 child: Column(
                   children: [
                     const Images(),
@@ -49,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
                       labelText: 'Name',
                       hintText: 'Your name',
                       isDense: true,
-                      controller: context.read<UserCubit>().signUpName,
+                      controller: context.read<All_Cubit_Classes>().signUpName,
                     ),
                     const SizedBox(height: 16),
                     //!Email
@@ -57,7 +57,7 @@ class SignUpScreen extends StatelessWidget {
                       labelText: 'Email',
                       hintText: 'Your email',
                       isDense: true,
-                      controller: context.read<UserCubit>().signUpEmail,
+                      controller: context.read<All_Cubit_Classes>().signUpEmail,
                     ),
                     const SizedBox(height: 16),
                     //! Phone Number
@@ -65,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
                       labelText: 'Phone number',
                       hintText: 'Your phone number ex:01234567890',
                       isDense: true,
-                      controller: context.read<UserCubit>().signUpPhoneNumber,
+                      controller: context.read<All_Cubit_Classes>().signUpPhoneNumber,
                     ),
                     const SizedBox(height: 16),
                     //! Password
@@ -75,7 +75,7 @@ class SignUpScreen extends StatelessWidget {
                       isDense: true,
                       obscureText: true,
                       suffixIcon: true,
-                      controller: context.read<UserCubit>().signUpPassword,
+                      controller: context.read<All_Cubit_Classes>().signUpPassword,
                     ),
                     //! Confirm Password
                     CustomInputField(
@@ -84,7 +84,7 @@ class SignUpScreen extends StatelessWidget {
                       isDense: true,
                       obscureText: true,
                       suffixIcon: true,
-                      controller: context.read<UserCubit>().confirmPassword,
+                      controller: context.read<All_Cubit_Classes>().confirmPassword,
                     ),
                     const SizedBox(height: 22),
                     //!Sign Up Button
@@ -93,7 +93,7 @@ class SignUpScreen extends StatelessWidget {
                       onPressed: () {
 
 
-                              context.read<UserCubit>().Registeration();
+                              context.read<All_Cubit_Classes>().Registeration();
 
 
                       },

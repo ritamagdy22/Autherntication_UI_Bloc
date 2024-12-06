@@ -21,7 +21,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-  fonts:
+f  fonts:
     - family: NotoSerif
       fonts:
         - asset: assets/fonts/NotoSerif-Regular.ttf

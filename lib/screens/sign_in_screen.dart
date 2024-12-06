@@ -1,5 +1,6 @@
-import 'package:api/cubit/User_Cubit.dart';
-import 'package:api/cubit/User_State.dart';
+import 'package:api/cubit/Cubit/All_Cubit_Classes.dart';
+import 'package:api/cubit/Cubit/All_Cubit_States.dart';
+import 'package:api/screens/Product_Screen.dart';
 import 'package:api/widgets/custom_form_button.dart';
 import 'package:api/widgets/custom_input_field.dart';
 import 'package:api/widgets/dont_have_an_account.dart';
@@ -16,16 +17,23 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: BlocConsumer<UserCubit, UserState>(
+      child: BlocConsumer<All_Cubit_Classes, All_Cubit_States>(
         listener: (context, state) {
           print('Current state: $state');
 
-          if (state is UserSignInFailed) {
+          if (state is User_Registeration_Failed) {
             ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.ErrorMEssage)));
-          } else if (state is UserSignInSucess) {
+                .showSnackBar(SnackBar(content: Text(state.Error_MEssage_Whiele_Register)));
+          } else if (state is User_Registeration_Sucess) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text('Sign-in successful')));
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductScreen(),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -44,7 +52,7 @@ class SignInScreen extends StatelessWidget {
                     ),
                     child: SingleChildScrollView(
                       child: Form(
-                        key: context.read<UserCubit>().signInFormKey,
+                        key: context.read<All_Cubit_Classes>().signInFormKey,
                         child: Column(
                           children: [
                             const PageHeading(title: 'Sign-in'),
@@ -52,7 +60,7 @@ class SignInScreen extends StatelessWidget {
                             CustomInputField(
                               labelText: 'Email',
                               hintText: 'Your email',
-                              controller: context.read<UserCubit>().signInEmail,
+                              controller: context.read<All_Cubit_Classes>().signInEmail,
                             ),
                             const SizedBox(height: 16),
                             //!Password
@@ -62,7 +70,7 @@ class SignInScreen extends StatelessWidget {
                               obscureText: true,
                               suffixIcon: true,
                               controller:
-                                  context.read<UserCubit>().signInPassword,
+                                  context.read<All_Cubit_Classes>().signInPassword,
                             ),
                             const SizedBox(height: 16),
                             //! Forget password?
@@ -72,17 +80,14 @@ class SignInScreen extends StatelessWidget {
                             CustomFormButton(
                                 innerText: 'Sign In',
                                 onPressed: () {
-                                  /*
-                                Navigator.push(
+                                  context.read<All_Cubit_Classes>().Login();
+                                  /* Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const ProfileScreen(),
                                   ),
                                 );
-                  
-                               */
-
-                                  context.read<UserCubit>().Login();
+                                  */
                                 }),
                             const SizedBox(height: 18),
                             //! Dont Have An Account ?

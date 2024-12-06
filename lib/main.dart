@@ -1,13 +1,12 @@
-import 'package:api/cubit/User_Cubit.dart';
-import 'package:api/screens/sign_in_screen.dart';
+import 'package:api/cubit/Cubit/All_Cubit_Classes.dart';
+import 'package:api/screens/Product_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 void main() {
   runApp(
     BlocProvider(
-      create: (context) => UserCubit(),
+      create: (context) => All_Cubit_Classes()..FetchProduct(), // Initialize and fetch products
       child: const MyApp(),
     ),
   );
@@ -18,9 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignInScreen(),
+      home: const ProductScreen(),
     );
   }
 }
